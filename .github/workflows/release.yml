@@ -36,7 +36,11 @@ jobs:
       - name: Build project
         run: bun run build:module
 
+      - name: Setup .npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
       - name: Publish to npm
-        run: cd packages/my-module && npm publish --provenance --access public
+        run: cd packages/evlog && npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true

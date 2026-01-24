@@ -1,108 +1,231 @@
-<!--
-Get your module up and running quickly.
+# evlog
 
-Find and replace all on all files (CMD+SHIFT+F):
-- Name: My Module
-- Package name: my-module
-- Description: My new Nuxt module
-- Repository: your-org/your-module
--->
+<!-- automd:badges color="black" license name="evlog" -->
 
-# My Module
-
-<!-- automd:badges color="black" license name="my-module" -->
-
-[![npm version](https://img.shields.io/npm/v/my-module?color=black)](https://npmjs.com/package/my-module)
-[![npm downloads](https://img.shields.io/npm/dm/my-module?color=black)](https://npm.chart.dev/my-module)
-[![license](https://img.shields.io/github/license/your-org/your-module?color=black)](https://github.com/your-org/your-module/blob/main/LICENSE)
+[![npm version](https://img.shields.io/npm/v/evlog?color=black)](https://npmjs.com/package/evlog)
+[![npm downloads](https://img.shields.io/npm/dm/evlog?color=black)](https://npm.chart.dev/evlog)
+[![license](https://img.shields.io/github/license/HugoRCD/evlog?color=black)](https://github.com/HugoRCD/evlog/blob/main/LICENSE)
 
 <!-- /automd -->
 
-My new Nuxt module for doing amazing things.
+A TypeScript logging library focused on **wide events** and structured error handling.
 
-## ✨ Features
+Inspired by [Logging Sucks](https://loggingsucks.com/) by [Boris Tane](https://github.com/boristane).
 
-<!-- automd:file src=".github/snippets/features.md" -->
+## Why evlog?
 
-- 🎯 **Feature One** - Description of your first feature
-- 📦 **Feature Two** - Description of your second feature
-- 🚀 **Feature Three** - Description of your third feature
+Traditional logging is broken:
 
-<!-- /automd -->
+- **Scattered logs**: A single request generates 10+ log lines across your codebase
+- **Missing context**: When debugging, you're grep-ing through noise hoping to find signal
+- **Useless errors**: `"Error: Something went wrong"` tells you nothing
 
-## 🚀 Installation
+**evlog** fixes this with:
 
-<!-- automd:file src=".github/snippets/installation.md" -->
+- **Wide Events**: One comprehensive log event per request with all context
+- **Structured Errors**: Errors that explain *why* they occurred and *how* to fix them
+- **Request Scoping**: Accumulate context throughout the request, emit once at the end
 
-Use `nuxt` to install the module automatically:
-
-```bash
-npx nuxt module add my-module
-```
-
-Or install manually:
+## Installation
 
 ```bash
 # npm
-npm install -D my-module
-
-# yarn
-yarn add -D my-module
+npm install evlog
 
 # pnpm
-pnpm add -D my-module
+pnpm add evlog
 
 # bun
-bun add -D my-module
+bun add evlog
 ```
 
-<!-- /automd -->
+## Quick Start
 
-## 📖 Documentation
+```typescript
+import { createLogger, getLogger, createError } from 'evlog'
 
-📖 **[Full Documentation →](https://example.com)**
+// Initialize once at app startup
+createLogger({
+  env: {
+    service: 'api',
+    environment: 'production',
+    version: '1.0.0',
+  },
+})
 
-## 🤝 Contributing
+const logger = getLogger()
 
-<!-- automd:file src=".github/snippets/contributing.md" -->
+// Simple logging
+logger.log('auth', 'User logged in')
 
-Contributions are welcome! Feel free to open an issue or submit a pull request.
+// Wide events - accumulate context, emit once
+const log = logger.request({ method: 'POST', path: '/checkout' })
+log.set({ user: { id: '123', plan: 'premium' } })
+log.set({ cart: { items: 3, total: 9999 } })
+log.emit() // Single event with all context + duration
 
-```bash
-# Install dependencies
-pnpm install
-
-# Generate type stubs
-pnpm run dev:prepare
-
-# Start the playground
-pnpm run dev
-
-# Run tests
-pnpm run test
+// Structured errors
+throw createError({
+  message: 'Payment failed',
+  why: 'Card declined by issuer',
+  fix: 'Try a different payment method',
+  link: 'https://docs.example.com/payments',
+})
 ```
 
-<!-- /automd -->
+## Wide Events
 
-## ❓ Questions & Support
+Instead of scattering logs throughout your code:
 
-<!-- automd:file src=".github/snippets/support.md" -->
+```typescript
+// ❌ Traditional logging - 10+ lines per request
+console.log('Request received')
+console.log('User authenticated')
+console.log('Loading cart')
+console.log('Processing payment')
+console.log('Payment failed')
+// Good luck finding what you need during an incident
+```
 
-- **Issues**: [Open an issue](https://github.com/your-org/your-module/issues) for bugs or feature requests
-- **Discussions**: [Join the discussion](https://github.com/your-org/your-module/discussions) for questions and ideas
+Use wide events:
 
-<!-- /automd -->
+```typescript
+// ✅ Wide event - one comprehensive log
+const log = logger.request({ method: 'POST', path: '/checkout' })
 
-## 📄 License
+log.set({ user: { id: '123', subscription: 'premium', accountAge: 847 } })
+log.set({ cart: { id: 'cart_xyz', items: 3, total: 15999 } })
+log.set({ payment: { method: 'card', provider: 'stripe' } })
 
-<!-- automd:file src=".github/snippets/license.md" -->
+if (error) {
+  log.error(error, { step: 'payment', retriable: false })
+}
 
-Published under the [MIT](https://github.com/your-org/your-module/blob/main/LICENSE) license.
+log.emit()
+// Emits single event with ALL context + automatic duration tracking
+```
 
-Made by [@YourName](https://github.com/YourName) and [community](https://github.com/your-org/your-module/graphs/contributors) 💛
+Output:
 
-<a href="https://github.com/your-org/your-module/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=your-org/your-module" />
-</a>
+```json
+{
+  "timestamp": "2025-01-24T10:23:45.612Z",
+  "level": "error",
+  "service": "api",
+  "method": "POST",
+  "path": "/checkout",
+  "duration": "1.2s",
+  "user": { "id": "123", "subscription": "premium", "accountAge": 847 },
+  "cart": { "id": "cart_xyz", "items": 3, "total": 15999 },
+  "payment": { "method": "card", "provider": "stripe" },
+  "error": { "message": "Card declined", "step": "payment", "retriable": false }
+}
+```
 
-<!-- /automd -->
+## Structured Errors
+
+Errors should explain themselves:
+
+```typescript
+import { createError } from 'evlog'
+
+throw createError({
+  message: 'Failed to sync repository',
+  why: 'GitHub API rate limit exceeded',
+  fix: 'Wait 1 hour or use a different token',
+  link: 'https://docs.github.com/en/rest/rate-limit',
+  cause: originalError,
+})
+```
+
+Console output (development):
+
+```
+EvlogError: Failed to sync repository
+
+  Why: GitHub API rate limit exceeded
+  Fix: Wait 1 hour or use a different token
+  Link: https://docs.github.com/en/rest/rate-limit
+
+  at syncRepository (src/sync.ts:42:11)
+  ...
+```
+
+## Nuxt Integration
+
+```typescript
+// nuxt.config.ts
+export default defineNuxtConfig({
+  modules: ['evlog/nuxt'],
+  evlog: {
+    env: {
+      service: 'my-app',
+      environment: process.env.NODE_ENV,
+    },
+  },
+})
+```
+
+## API Reference
+
+### `createLogger(config)`
+
+Initialize the global logger instance.
+
+```typescript
+createLogger({
+  env: {
+    service: string      // Service name (e.g., 'api', 'worker')
+    environment: string  // Environment (e.g., 'production', 'development')
+    commitHash?: string  // Git commit hash
+    version?: string     // App version
+    region?: string      // Deployment region
+  },
+  pretty?: boolean       // Enable pretty printing (default: true in dev)
+})
+```
+
+### `getLogger()`
+
+Get the global logger instance.
+
+### `logger.log(tag, message)`
+
+Simple logging with a tag.
+
+### `logger.info(event)` / `logger.error(event)`
+
+Emit a wide event.
+
+### `logger.request(context)`
+
+Create a request-scoped logger for building wide events.
+
+Returns a `RequestLogger` with:
+- `set(context)`: Add context to the event
+- `error(error, context?)`: Log an error
+- `emit(overrides?)`: Emit the final event with duration
+
+### `createError(options)`
+
+Create a structured error.
+
+```typescript
+createError({
+  message: string   // What happened
+  why?: string      // Why it happened
+  fix?: string      // How to fix it
+  link?: string     // Documentation URL
+  cause?: Error     // Original error
+})
+```
+
+## Credits
+
+This library is inspired by [Logging Sucks](https://loggingsucks.com/) by [Boris Tane](https://github.com/boristane). The wide events philosophy and structured logging approach are adapted from his excellent work.
+
+## License
+
+[MIT](./LICENSE)
+
+Made by [@HugoRCD](https://github.com/HugoRCD)

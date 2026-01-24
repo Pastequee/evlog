@@ -1,5 +1,5 @@
 {
-  "name": "my-module-docs",
+  "name": "evlog-docs",
   "private": true,
   "scripts": {
     "dev": "nuxt dev --extends docus",

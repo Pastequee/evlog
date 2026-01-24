@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-  modules: ['my-module'],
+  modules: ['evlog'],
   devtools: { enabled: true },
-  myModule: {},
+  evlog: {},
 })

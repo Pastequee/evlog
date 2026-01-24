@@ -1,10 +1,10 @@
 {
-  "name": "my-module",
-  "version": "1.0.0",
-  "description": "My new Nuxt module",
+  "name": "evlog",
+  "version": "0.1.0",
+  "description": "Wide event logging library with structured error handling. Inspired by LoggingSucks.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/your-org/your-module.git"
+    "url": "git+https://github.com/HugoRCD/evlog.git"
   },
   "license": "MIT",
   "type": "module",
@@ -12,6 +12,14 @@
     ".": {
       "types": "./dist/types.d.mts",
       "import": "./dist/module.mjs"
+    },
+    "./nuxt": {
+      "types": "./dist/nuxt.d.mts",
+      "import": "./dist/nuxt.mjs"
+    },
+    "./nitro": {
+      "types": "./dist/nitro.d.mts",
+      "import": "./dist/nitro.mjs"
     }
   },
   "main": "./dist/module.mjs",
@@ -19,6 +27,12 @@
     "*": {
       ".": [
         "./dist/types.d.mts"
+      ],
+      "nuxt": [
+        "./dist/nuxt.d.mts"
+      ],
+      "nitro": [
+        "./dist/nitro.d.mts"
       ]
     }
   },

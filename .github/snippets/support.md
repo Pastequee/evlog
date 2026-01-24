@@ -1,2 +1,2 @@
-- **Issues**: [Open an issue](https://github.com/your-org/your-module/issues) for bugs or feature requests
-- **Discussions**: [Join the discussion](https://github.com/your-org/your-module/discussions) for questions and ideas
+- **Issues**: [Open an issue](https://github.com/HugoRCD/evlog/issues) for bugs or feature requests
+- **Discussions**: [Join the discussion](https://github.com/HugoRCD/evlog/discussions) for questions and ideas

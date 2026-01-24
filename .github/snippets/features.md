@@ -1,3 +1,5 @@
-- 🎯 **Feature One** - Description of your first feature
-- 📦 **Feature Two** - Description of your second feature
-- 🚀 **Feature Three** - Description of your third feature
+- **Wide Events** - One comprehensive log event per request with all context
+- **Structured Errors** - Errors that explain *why* they occurred and *how* to fix them
+- **Request Scoping** - Accumulate context throughout the request lifecycle
+- **Framework Integration** - First-class support for Nuxt and Nitro
+- **Pretty for Dev** - Human-readable in development, JSON in production

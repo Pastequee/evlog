@@ -1,22 +1,22 @@
 {
-  "name": "nuxt-module-starter",
+  "name": "evlog-monorepo",
   "private": true,
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/your-org/your-module.git"
+    "url": "git+https://github.com/HugoRCD/evlog.git"
   },
   "author": "HugoRCD",
   "license": "MIT",
   "packageManager": "bun@1.2.4",
   "scripts": {
-    "dev": "turbo run dev --filter=my-module-playground",
+    "dev": "turbo run dev --filter=evlog-playground",
     "dev:prepare": "turbo run dev:prepare",
-    "dev:docs": "turbo run dev --filter=my-module-docs",
-    "docs": "turbo run dev --filter=my-module-docs",
+    "dev:docs": "turbo run dev --filter=evlog-docs",
+    "docs": "turbo run dev --filter=evlog-docs",
     "build": "turbo run build",
-    "build:module": "turbo run build --filter=my-module",
-    "build:docs": "turbo run build --filter=my-module-docs",
+    "build:module": "turbo run build --filter=evlog",
+    "build:docs": "turbo run build --filter=evlog-docs",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
     "test": "turbo run test",

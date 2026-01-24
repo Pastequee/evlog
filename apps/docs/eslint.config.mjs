@@ -1,8 +1,3 @@
-import { createConfigForNuxt } from '@nuxt/eslint-config/flat'
+import { createConfig } from '@hrcd/eslint-config'
 
-export default createConfigForNuxt({
-  features: {
-    tooling: true,
-    stylistic: true,
-  },
-})
+export default createConfig()

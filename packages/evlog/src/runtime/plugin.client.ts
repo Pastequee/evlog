@@ -1,5 +1,5 @@
-import { defineNuxtPlugin, useRuntimeConfig } from '#app'
 import { initLog } from './composables/log'
+import { defineNuxtPlugin, useRuntimeConfig } from '#app'
 
 export default defineNuxtPlugin((_nuxtApp) => {
   const config = useRuntimeConfig()

@@ -30,8 +30,7 @@ async function testApiSuccess() {
   loadingSuccess.value = true
   try {
     await $fetch('/api/test/success')
-  }
-  finally {
+  } finally {
     loadingSuccess.value = false
   }
 }
@@ -40,9 +39,9 @@ async function testApiError() {
   loadingError.value = true
   try {
     await $fetch('/api/test/error')
-  }
-  catch {}
-  finally {
+  } catch {
+    // Do nothing
+  } finally {
     loadingError.value = false
   }
 }
@@ -51,8 +50,7 @@ async function testWideEvent() {
   loadingWideEvent.value = true
   try {
     await $fetch('/api/test/wide-event')
-  }
-  finally {
+  } finally {
     loadingWideEvent.value = false
   }
 }

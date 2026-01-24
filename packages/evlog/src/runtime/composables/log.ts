@@ -38,8 +38,7 @@ function emitClientWideEvent(level: LogLevel, event: Record<string, unknown>): v
       'color: inherit',
       rest,
     )
-  }
-  else {
+  } else {
     const consoleMethod = level === 'error' ? 'error' : level === 'warn' ? 'warn' : 'log'
     console[consoleMethod](JSON.stringify(formatted))
   }
@@ -60,8 +59,7 @@ function emitClientTaggedLog(level: LogLevel, tag: string, message: string): voi
       levelColors[level] || '',
       'color: inherit',
     )
-  }
-  else {
+  } else {
     emitClientWideEvent(level, { tag, message })
   }
 }
@@ -71,23 +69,18 @@ function createLogMethod(level: LogLevel) {
     if (IS_CLIENT) {
       if (typeof tagOrEvent === 'string' && message !== undefined) {
         emitClientTaggedLog(level, tagOrEvent, message)
-      }
-      else if (typeof tagOrEvent === 'object') {
+      } else if (typeof tagOrEvent === 'object') {
         emitClientWideEvent(level, tagOrEvent)
-      }
-      else {
+      } else {
         emitClientTaggedLog(level, 'log', String(tagOrEvent))
       }
-    }
-    else {
+    } else {
       import('../../logger').then(({ log: serverLog }) => {
         if (typeof tagOrEvent === 'string' && message !== undefined) {
           serverLog[level](tagOrEvent, message)
-        }
-        else if (typeof tagOrEvent === 'object') {
+        } else if (typeof tagOrEvent === 'object') {
           serverLog[level](tagOrEvent)
-        }
-        else {
+        } else {
           serverLog[level]('log', String(tagOrEvent))
         }
       })

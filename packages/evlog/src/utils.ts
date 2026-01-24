@@ -39,7 +39,7 @@ export function isDev(): boolean {
 /**
  * Read package.json info (server-side only).
  */
-export async function getPackageInfo(): Promise<{ name?: string, version?: string }> {
+export function getPackageInfo(): { name?: string, version?: string } {
   if (isClient()) {
     return {}
   }

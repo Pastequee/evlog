@@ -1,0 +1,17 @@
+{
+  "name": "evlog-nitro-playground",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nitro dev",
+    "build": "nitro build",
+    "preview": "npx srvx --prod .output/"
+  },
+  "dependencies": {
+    "evlog": "workspace:*"
+  },
+  "devDependencies": {
+    "nitro": "latest",
+    "rolldown": "latest"
+  }
+}

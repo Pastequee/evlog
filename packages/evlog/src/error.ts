@@ -16,6 +16,7 @@ import { colors, isServer } from './utils'
  * ```
  */
 export class EvlogError extends Error {
+
   readonly why?: string
   readonly fix?: string
   readonly link?: string
@@ -89,6 +90,7 @@ export class EvlogError extends Error {
       stack: this.stack,
     }
   }
+
 }
 
 /**

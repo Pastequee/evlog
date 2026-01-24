@@ -53,8 +53,7 @@ function emitWideEvent(level: LogLevel, event: Record<string, unknown>): void {
 
   if (globalPretty) {
     prettyPrintWideEvent(formatted)
-  }
-  else {
+  } else {
     const consoleMethod = level === 'error' ? 'error' : level === 'warn' ? 'warn' : 'log'
     console[consoleMethod](JSON.stringify(formatted))
   }
@@ -65,8 +64,7 @@ function emitTaggedLog(level: LogLevel, tag: string, message: string): void {
     const color = getLevelColor(level)
     const timestamp = new Date().toISOString().slice(11, 23)
     console.log(`${colors.dim}${timestamp}${colors.reset} ${color}[${tag}]${colors.reset} ${message}`)
-  }
-  else {
+  } else {
     emitWideEvent(level, { tag, message })
   }
 }
@@ -112,11 +110,9 @@ function createLogMethod(level: LogLevel) {
   return function logMethod(tagOrEvent: string | Record<string, unknown>, message?: string): void {
     if (typeof tagOrEvent === 'string' && message !== undefined) {
       emitTaggedLog(level, tagOrEvent, message)
-    }
-    else if (typeof tagOrEvent === 'object') {
+    } else if (typeof tagOrEvent === 'object') {
       emitWideEvent(level, tagOrEvent)
-    }
-    else {
+    } else {
       emitTaggedLog(level, 'log', String(tagOrEvent))
     }
   }

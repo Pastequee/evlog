@@ -76,7 +76,7 @@ describe('log', () => {
   it('logs tagged message with info level', () => {
     log.info('auth', 'User logged in')
     expect(consoleSpy).toHaveBeenCalled()
-    const output = consoleSpy.mock.calls[0][0]
+    const [[output]] = consoleSpy.mock.calls
     expect(output).toContain('"level":"info"')
     expect(output).toContain('"tag":"auth"')
     expect(output).toContain('"message":"User logged in"')
@@ -85,7 +85,7 @@ describe('log', () => {
   it('logs wide event object', () => {
     log.info({ action: 'checkout', items: 3 })
     expect(consoleSpy).toHaveBeenCalled()
-    const output = consoleSpy.mock.calls[0][0]
+    const [[output]] = consoleSpy.mock.calls
     expect(output).toContain('"action":"checkout"')
     expect(output).toContain('"items":3')
   })
@@ -187,7 +187,7 @@ describe('createRequestLogger', () => {
     logger.emit()
 
     expect(consoleSpy).toHaveBeenCalled()
-    const output = consoleSpy.mock.calls[0][0]
+    const [[output]] = consoleSpy.mock.calls
     expect(output).toContain('"level":"info"')
     expect(output).toContain('"method":"GET"')
     expect(output).toContain('"path":"/api/test"')
@@ -212,7 +212,7 @@ describe('createRequestLogger', () => {
     await new Promise(resolve => setTimeout(resolve, 50))
     logger.emit()
 
-    const output = consoleSpy.mock.calls[0][0]
+    const [[output]] = consoleSpy.mock.calls
     expect(output).toMatch(/"duration":"[0-9]+ms"/)
   })
 
@@ -221,7 +221,7 @@ describe('createRequestLogger', () => {
     logger.set({ original: true })
     logger.emit({ override: true })
 
-    const output = consoleSpy.mock.calls[0][0]
+    const [[output]] = consoleSpy.mock.calls
     expect(output).toContain('"original":true')
     expect(output).toContain('"override":true')
   })

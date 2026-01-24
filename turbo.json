@@ -14,20 +14,17 @@
       "dependsOn": ["^dev:prepare"],
       "outputs": ["dist/**", ".output/**", ".nuxt/**"]
     },
-    "transit": {
-      "dependsOn": ["^transit"]
-    },
     "lint": {
-      "dependsOn": ["transit"]
+      "dependsOn": ["^build"]
     },
     "lint:fix": {
       "cache": false
     },
     "test": {
-      "dependsOn": ["build"]
+      "dependsOn": ["^build"]
     },
     "typecheck": {
-      "dependsOn": ["transit"]
+      "dependsOn": ["^build"]
     }
   }
 }

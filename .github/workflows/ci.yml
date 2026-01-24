@@ -35,6 +35,8 @@ jobs:
         run: bun install --frozen-lockfile
       - name: Prepare
         run: bun run dev:prepare
+      - name: Build module
+        run: bun run build:module
       - name: Lint
         run: bun run lint
 
@@ -49,6 +51,8 @@ jobs:
         run: bun install --frozen-lockfile
       - name: Prepare
         run: bun run dev:prepare
+      - name: Build module
+        run: bun run build:module
       - name: Typecheck
         run: bun run typecheck
 

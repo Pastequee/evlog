@@ -1,7 +1,8 @@
 ---
 seo:
-  title: evlog - Wide Events & Structured Errors for TypeScript
-  description: A TypeScript logging library focused on wide events and structured error handling. One log per request, containing everything you need.
+  title: evlog - Logging that makes sense
+  description: Wide events and structured errors for TypeScript. One log per request, full context, errors that explain why and how to fix.
+  ogImage: /og.png
 ---
 
 ::landing-hero

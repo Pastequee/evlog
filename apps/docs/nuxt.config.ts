@@ -7,6 +7,7 @@ export default defineNuxtConfig({
 
   site: {
     name: 'evlog',
+    url: 'https://evlog.dev',
   },
 
   mcp: {

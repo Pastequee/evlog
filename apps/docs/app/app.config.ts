@@ -1,4 +1,9 @@
 export default defineAppConfig({
+  seo: {
+    titleTemplate: '%s - evlog',
+    title: 'evlog',
+    description: 'Wide events and structured errors for TypeScript. One log per request, full context, errors that explain why and how to fix.',
+  },
   socials: {
     x: 'https://x.com/evlog_js',
     github: 'https://github.com/hugorcd/evlog',

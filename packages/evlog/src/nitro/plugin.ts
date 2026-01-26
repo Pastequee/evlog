@@ -1,4 +1,5 @@
 import { defineNitroPlugin } from 'nitropack/runtime'
+import { useRuntimeConfig } from 'nitropack/runtime'
 import { createRequestLogger, initLogger } from '../logger'
 import type { RequestLogger, ServerEvent } from '../types'
 
@@ -22,7 +23,13 @@ function getResponseStatus(event: ServerEvent): number {
 }
 
 export default defineNitroPlugin((nitroApp) => {
-  initLogger()
+  const config = useRuntimeConfig()
+  const evlogConfig = config.evlog as { env?: Record<string, unknown>, pretty?: boolean } | undefined
+
+  initLogger({
+    env: evlogConfig?.env,
+    pretty: evlogConfig?.pretty,
+  })
 
   nitroApp.hooks.hook('request', (event) => {
     const e = event as ServerEvent

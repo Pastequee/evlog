@@ -51,6 +51,29 @@ function emitTaggedLog(level: LogLevel, tag: string, message: string): void {
   }
 }
 
+function formatValue(value: unknown): string {
+  if (value === null || value === undefined) {
+    return String(value)
+  }
+  if (typeof value === 'object') {
+    // Flatten object to key=value pairs
+    const pairs: string[] = []
+    for (const [k, v] of Object.entries(value as Record<string, unknown>)) {
+      if (v !== undefined && v !== null) {
+        if (typeof v === 'object') {
+          // For nested objects, show as JSON
+          pairs.push(`${k}=${JSON.stringify(v)}`)
+        }
+        else {
+          pairs.push(`${k}=${v}`)
+        }
+      }
+    }
+    return pairs.join(' ')
+  }
+  return String(value)
+}
+
 function prettyPrintWideEvent(event: Record<string, unknown>): void {
   const { timestamp, level, service, environment, version, ...rest } = event
   const levelColor = getLevelColor(level as string)
@@ -65,27 +88,28 @@ function prettyPrintWideEvent(event: Record<string, unknown>): void {
     delete rest.path
   }
 
-  if (rest.duration) {
-    header += ` ${colors.dim}${rest.duration}${colors.reset}`
-    delete rest.duration
-  }
-
   if (rest.status) {
     const statusColor = (rest.status as number) >= 400 ? colors.red : colors.green
     header += ` ${statusColor}${rest.status}${colors.reset}`
     delete rest.status
   }
 
+  if (rest.duration) {
+    header += ` ${colors.dim}in ${rest.duration}${colors.reset}`
+    delete rest.duration
+  }
+
   console.log(header)
 
-  if (Object.keys(rest).length > 0) {
-    for (const [key, value] of Object.entries(rest)) {
-      if (value !== undefined) {
-        const formatted = typeof value === 'object' ? JSON.stringify(value) : value
-        console.log(`  ${colors.dim}${key}:${colors.reset} ${formatted}`)
-      }
-    }
-  }
+  const entries = Object.entries(rest).filter(([_, v]) => v !== undefined)
+  const lastIndex = entries.length - 1
+
+  entries.forEach(([key, value], index) => {
+    const isLast = index === lastIndex
+    const prefix = isLast ? '└─' : '├─'
+    const formatted = formatValue(value)
+    console.log(`  ${colors.dim}${prefix}${colors.reset} ${colors.cyan}${key}:${colors.reset} ${formatted}`)
+  })
 }
 
 function createLogMethod(level: LogLevel) {

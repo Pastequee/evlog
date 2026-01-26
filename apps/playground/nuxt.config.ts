@@ -7,5 +7,9 @@ export default defineNuxtConfig({
 
   compatibilityDate: 'latest',
 
-  evlog: {},
+  evlog: {
+    env: {
+      service: 'playground',
+    }
+  },
 })

@@ -1,6 +1,6 @@
 {
   "name": "evlog",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Wide event logging library with structured error handling. Inspired by LoggingSucks.",
   "author": "HugoRCD <contact@hrcd.fr>",
   "homepage": "https://evlog.dev",
@@ -57,7 +57,7 @@
   ],
   "scripts": {
     "build": "unbuild",
-    "dev:prepare": "unbuild --stub",
+    "dev:prepare": "unbuild",
     "release": "bun run lint && bun run test && bun run build && changelogen --release && npm publish && git push --follow-tags",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

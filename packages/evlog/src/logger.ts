@@ -63,8 +63,7 @@ function formatValue(value: unknown): string {
         if (typeof v === 'object') {
           // For nested objects, show as JSON
           pairs.push(`${k}=${JSON.stringify(v)}`)
-        }
-        else {
+        } else {
           pairs.push(`${k}=${v}`)
         }
       }

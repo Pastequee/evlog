@@ -1,13 +1,13 @@
 ---
-name: evlog
+name: Review logging patterns
 description: Review code for logging patterns and suggest evlog adoption. Detects console.log spam, unstructured errors, and missing context. Guides wide event design, structured error handling, and request-scoped logging.
 license: MIT
 metadata:
   author: HugoRCD
-  version: "0.1"
+  version: "0.2"
 ---
 
-# evlog - Better Logging Through Wide Events
+# Review logging patterns
 
 Review and improve logging patterns in TypeScript/JavaScript codebases. Transform scattered console.logs into structured wide events and convert generic errors into self-documenting structured errors.
 

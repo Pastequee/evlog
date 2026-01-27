@@ -77,7 +77,7 @@ const features = [
               <div class="h-px flex-1 bg-zinc-200 transition-colors duration-300 group-hover:bg-evlog-blue/30 dark:bg-zinc-800" />
             </div>
 
-            <h3 class="mb-3 font-serif text-xl font-bold tracking-tight text-highlighted">
+            <h3 class="mb-3 text-xl font-bold tracking-tight text-highlighted">
               {{ feature.title }}
             </h3>
 

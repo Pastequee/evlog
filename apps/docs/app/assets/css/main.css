@@ -11,14 +11,11 @@
 
 :root {
   --ui-radius: 0;
-  --ui-bg: #09090b;
   --ui-primary: #2853FF;
 }
 
-.dark,
-:root {
+.dark {
   --ui-bg: #09090b;
-  --ui-primary: #2853FF;
 }
 
 @layer base {
@@ -52,8 +49,12 @@
 
 /* Subtle dot grid for hero */
 .dot-grid {
-  background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
   background-size: 24px 24px;
+}
+
+.dark .dot-grid {
+  background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
 }
 
 /* Fade mask for scroll areas */

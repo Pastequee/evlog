@@ -59,7 +59,7 @@ log.set({ cart: { items, total } })
 </script>
 
 <template>
-  <section class="bg-[#09090b] py-24 lg:py-32">
+  <section class="bg-default py-24 lg:py-32">
     <div class="mx-auto w-full max-w-6xl px-6">
       <Motion
         :initial="prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 20 }"
@@ -68,10 +68,10 @@ log.set({ cart: { items, total } })
         :in-view-options="{ once: true }"
         class="mb-12"
       >
-        <p class="section-label mb-4 font-mono text-xs uppercase tracking-widest text-zinc-500">
+        <p class="section-label mb-4 font-mono text-xs uppercase tracking-widest text-muted">
           Features
         </p>
-        <h2 class="editorial-title text-3xl font-bold text-white md:text-4xl">
+        <h2 class="editorial-title text-3xl font-bold text-highlighted md:text-4xl">
           Everything you need<span class="evlog-dot">.</span>
         </h2>
       </Motion>
@@ -85,14 +85,14 @@ log.set({ cart: { items, total } })
           :transition="{ duration: 0.4, delay: index * 0.05 }"
           :in-view-options="{ once: true }"
         >
-          <div class="group h-full border border-zinc-800 bg-[#0c0c0e] p-5 transition-colors duration-300 hover:border-zinc-700">
+          <div class="group h-full border border-muted/50 bg-muted/30 p-5 transition-colors duration-300 hover:border-muted">
             <h3 class="mb-2 font-mono font-semibold text-evlog-blue">
               {{ feature.title }}
             </h3>
-            <p class="mb-4 text-sm leading-relaxed text-zinc-500">
+            <p class="mb-4 text-sm leading-relaxed text-toned">
               {{ feature.description }}
             </p>
-            <div class="overflow-hidden border border-zinc-800 bg-[#09090b] p-3 transition-colors duration-300 group-hover:border-zinc-700">
+            <div class="dark overflow-hidden border border-zinc-800 bg-zinc-950 p-3 transition-colors duration-300 group-hover:border-zinc-700">
               <pre class="font-mono text-[11px] leading-relaxed text-zinc-500 transition-colors duration-300 group-hover:text-zinc-400">{{ feature.code }}</pre>
             </div>
           </div>

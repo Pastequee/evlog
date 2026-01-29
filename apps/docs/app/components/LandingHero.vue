@@ -153,7 +153,7 @@ function getLevelColor(level: string) {
 </script>
 
 <template>
-  <section class="relative bg-[#09090b] dot-grid overflow-hidden">
+  <section class="relative bg-default dot-grid overflow-hidden">
     <div class="mx-auto w-full max-w-6xl px-6 py-16 lg:py-24">
       <div class="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
         <Motion
@@ -163,18 +163,18 @@ function getLevelColor(level: string) {
         >
           <button
             class="group mb-4 flex items-center gap-2 font-mono text-sm transition-colors cursor-copy"
-            :class="copied ? 'text-emerald-500' : 'text-zinc-500 hover:text-zinc-300'"
+            :class="copied ? 'text-emerald-500' : 'text-muted hover:text-highlighted'"
             @click="copyCommand"
           >
             <span v-if="copied">Copied!</span>
             <span v-else>$ npx skills add hugorcd/evlog</span>
           </button>
 
-          <h1 class="editorial-title mb-6 text-5xl font-bold text-white sm:text-5xl lg:text-6xl">
+          <h1 class="editorial-title mb-6 text-5xl font-bold text-highlighted sm:text-5xl lg:text-6xl">
             Logging that<br>makes sense<span class="evlog-dot">.</span>
           </h1>
 
-          <p class="mb-8 max-w-md text-base text-zinc-400 leading-relaxed">
+          <p class="mb-8 max-w-md text-base text-muted leading-relaxed">
             Wide events and structured errors for TypeScript.
             One log per request. Full context. Errors that explain why.
           </p>
@@ -195,7 +195,7 @@ function getLevelColor(level: string) {
               target="_blank"
               size="lg"
               variant="outline"
-              class="border-zinc-800 text-zinc-400 hover:border-zinc-600 hover:text-white"
+              color="neutral"
             >
               <template #leading>
                 <UIcon name="i-simple-icons-github" class="size-4" />
@@ -210,7 +210,7 @@ function getLevelColor(level: string) {
           :animate="{ opacity: 1, y: 0 }"
           :transition="{ duration: 0.5, delay: 0.15 }"
         >
-          <div class="overflow-hidden border border-zinc-800 bg-[#0c0c0e]">
+          <div class="dark overflow-hidden border border-zinc-800 bg-[#0c0c0e]">
             <div class="flex items-center gap-2 border-b border-zinc-800 px-4 py-3">
               <div class="flex gap-1.5">
                 <div class="size-3 rounded-full bg-zinc-700" />

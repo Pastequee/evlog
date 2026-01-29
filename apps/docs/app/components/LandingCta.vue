@@ -9,7 +9,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="bg-[#09090b] py-24 lg:py-32">
+  <section class="bg-default py-24 lg:py-32">
     <div class="mx-auto w-full max-w-6xl px-6">
       <div class="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
         <Motion
@@ -18,13 +18,13 @@ onMounted(() => {
           :transition="{ duration: 0.5 }"
           :in-view-options="{ once: true }"
         >
-          <p class="section-label mb-4 font-mono text-xs uppercase tracking-widest text-zinc-500">
+          <p class="section-label mb-4 font-mono text-xs uppercase tracking-widest text-muted">
             Get Started
           </p>
-          <h2 class="editorial-title mb-6 text-3xl font-bold text-white md:text-4xl lg:text-5xl">
+          <h2 class="editorial-title mb-6 text-3xl font-bold text-highlighted md:text-4xl lg:text-5xl">
             Stop grep-ing through chaos<span class="evlog-dot">.</span>
           </h2>
-          <p class="max-w-lg text-base text-zinc-400 mb-10 leading-relaxed">
+          <p class="max-w-lg text-base text-muted mb-10 leading-relaxed">
             Wide events, structured errors, zero config.
             Ship with the logging your future self will thank you for.
           </p>
@@ -45,7 +45,7 @@ onMounted(() => {
               target="_blank"
               size="lg"
               variant="outline"
-              class="border-zinc-800 text-zinc-400 hover:border-zinc-600 hover:text-white"
+              color="neutral"
             >
               <template #leading>
                 <UIcon name="i-simple-icons-github" class="size-4" />
@@ -62,7 +62,7 @@ onMounted(() => {
           :in-view-options="{ once: true }"
           class="hidden lg:block"
         >
-          <div class="overflow-hidden border border-zinc-800 bg-[#0c0c0e]">
+          <div class="dark overflow-hidden border border-zinc-800 bg-[#0c0c0e]">
             <div class="flex items-center gap-2 border-b border-zinc-800 px-4 py-3">
               <div class="flex gap-1.5">
                 <div class="size-3 rounded-full bg-zinc-700" />

@@ -9,7 +9,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="bg-[#09090b] py-24 lg:py-32">
+  <section class="bg-default py-24 lg:py-32">
     <div class="mx-auto w-full max-w-6xl px-6">
       <Motion
         :initial="prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 20 }"
@@ -18,10 +18,10 @@ onMounted(() => {
         :in-view-options="{ once: true }"
         class="mb-12"
       >
-        <p class="section-label mb-4 font-mono text-xs uppercase tracking-widest text-zinc-500">
+        <p class="section-label mb-4 font-mono text-xs uppercase tracking-widest text-muted">
           Simple API
         </p>
-        <h2 class="editorial-title text-3xl font-bold text-white md:text-4xl max-w-lg">
+        <h2 class="editorial-title text-3xl font-bold text-highlighted md:text-4xl max-w-lg">
           Three lines of code.<br>Full observability<span class="evlog-dot">.</span>
         </h2>
       </Motion>
@@ -33,7 +33,7 @@ onMounted(() => {
           :transition="{ duration: 0.5, delay: 0.1 }"
           :in-view-options="{ once: true }"
         >
-          <div class="h-full overflow-hidden border border-zinc-800 bg-[#0c0c0e]">
+          <div class="dark h-full overflow-hidden border border-zinc-800 bg-[#0c0c0e]">
             <div class="flex items-center gap-2 border-b border-zinc-800 px-4 py-3">
               <div class="flex gap-1.5">
                 <div class="size-3 rounded-full bg-zinc-700" />
@@ -61,7 +61,7 @@ onMounted(() => {
           :transition="{ duration: 0.5, delay: 0.2 }"
           :in-view-options="{ once: true }"
         >
-          <div class="h-full overflow-hidden border border-zinc-800 bg-[#0c0c0e]">
+          <div class="dark h-full overflow-hidden border border-zinc-800 bg-[#0c0c0e]">
             <div class="flex items-center gap-2 border-b border-zinc-800 px-4 py-3">
               <div class="flex gap-1.5">
                 <div class="size-3 rounded-full bg-zinc-700" />
@@ -113,10 +113,10 @@ onMounted(() => {
         :in-view-options="{ once: true }"
         class="mt-12"
       >
-        <p class="section-label mb-4 font-mono text-xs uppercase tracking-widest text-zinc-500">
+        <p class="section-label mb-4 font-mono text-xs uppercase tracking-widest text-muted">
           Structured Errors
         </p>
-        <h3 class="editorial-title text-2xl font-bold text-white md:text-3xl max-w-lg mb-6">
+        <h3 class="editorial-title text-2xl font-bold text-highlighted md:text-3xl max-w-lg mb-6">
           Errors that explain why<span class="evlog-dot">.</span>
         </h3>
       </Motion>
@@ -128,7 +128,7 @@ onMounted(() => {
           :transition="{ duration: 0.5, delay: 0.4 }"
           :in-view-options="{ once: true }"
         >
-          <div class="h-full overflow-hidden border border-zinc-800 bg-[#0c0c0e]">
+          <div class="dark h-full overflow-hidden border border-zinc-800 bg-[#0c0c0e]">
             <div class="flex items-center gap-2 border-b border-zinc-800 px-4 py-3">
               <div class="flex gap-1.5">
                 <div class="size-3 rounded-full bg-zinc-700" />
@@ -154,7 +154,7 @@ onMounted(() => {
           :transition="{ duration: 0.5, delay: 0.5 }"
           :in-view-options="{ once: true }"
         >
-          <div class="h-full overflow-hidden border border-zinc-800 bg-[#0c0c0e]">
+          <div class="dark h-full overflow-hidden border border-zinc-800 bg-[#0c0c0e]">
             <div class="flex items-center gap-2 border-b border-zinc-800 px-4 py-3">
               <div class="flex gap-1.5">
                 <div class="size-3 rounded-full bg-zinc-700" />

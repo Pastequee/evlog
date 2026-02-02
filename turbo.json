@@ -6,7 +6,7 @@
       "outputs": [".vercel/output/**", "dist/**", ".output/**", ".nuxt/**"],
       "env": [
         "AI_GATEWAY_API_KEY",
-        "NUXT_PUBLIC_SITE_URL"
+        "NUXT_SITE_URL"
       ]
     },
     "dev": {
